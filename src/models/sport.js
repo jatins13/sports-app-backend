@@ -10,7 +10,7 @@ const getAllSportsToursAndMatches = async () => {
 }
 
 const getSportIdByTourId = async (tourId) => {
-    const statement = 'select sportId from tours where sports.tourId = ?';
+    const statement = 'select sportId from tours where tours.id = ?';
     const parameters = [tourId];
     return await mysql.query(statement, parameters);
 }

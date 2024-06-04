@@ -1,7 +1,8 @@
 const express = require('express');
 const helper = require("./src/lib/helper");
 const config = require('./config/config');
-const app = express();
+const app = express()
+app.use(express.json())
 const port = config.server.port;
 
 //Register routes

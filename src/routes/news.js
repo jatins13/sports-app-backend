@@ -4,7 +4,14 @@ module.exports = function (app) {
     app.route('/news').post(async (req, res, next) => {
         try {
             const body = req.body;
-            return res.json(await News.createNews(body));
+            if (body.matchId) {
+                return await News.createNewsForMatch(body);
+            }
+            else if (body.tourId) {
+                return res.json(await News.createNewsForTour(body));
+            }
+            throw new Error("Give a valid body with either matchId or tourId.")
+
         } catch (err) {
             return next(err);
         }
@@ -16,13 +23,16 @@ module.exports = function (app) {
             let params = req.query;
             let result = null;
             if (params.matchId) {
-                result = await News.getNewsByMatchId(params);
+                return res.json(await News.getNewsByMatchId(params));
             }
             else if (params.tourId) {
-                result = await News.getNewsByTourId(params);
+                return res.json(await News.getNewsByTourId(params));
             }
-            result = await News.getNewsBySportId(params);
-            return res.json(result);
+            else if (params.sportId) {
+                return res.json(await News.getNewsBySportId(params));
+            }
+            throw new Error("Please provide a valid matchId or tourId or sportId to fetch news.")
+
         } catch (err) {
             return next(err);
         }

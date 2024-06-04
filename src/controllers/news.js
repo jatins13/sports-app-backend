@@ -18,15 +18,15 @@ const getNewsBySportId = async (params) => {
 
 const createNewsForMatch = async (body) => {
     const tourId = await Tour.getTourIdByMatchId(body.matchId);
-    const sportId = await Sport.getSportIdByTourId(tourId);
-    body.tourId = tourId;
-    body.sportId = sportId;
+    body.tourId = tourId[0].tourId;
+    const sportId = await Sport.getSportIdByTourId(body.tourId);
+    body.sportId = sportId[0].sportId;
     return await News.createNewsForMatch(body);
 }
 
 const createNewsForTour = async (body) => {
     const sportId = await Sport.getSportIdByTourId(body.tourId);
-    body.sportId = sportId;
+    body.sportId = sportId[0].sportId;
     return await News.createNewsForTour(body);
 }
 
