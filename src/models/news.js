@@ -20,19 +20,14 @@ const getNewsByMatchId = async (params) => {
 }
 
 const createNewsForMatch = async (params) => {
-    const matchId = params.matchId;
-    const tourId = await Tour.getTourIdByMatchId(matchId);
-    const sportId = await sport.getSportIdByTourId(tourId);
     const statement = 'insert into news(title, description, matchId, tourId, sportId) values(?, ?, ?, ?, ?)';
-    const parameters = [params.title, params.description, matchId, tourId, sportId];
+    const parameters = [params.title, params.description, params.matchId, params.tourId, params.sportId];
     return await mysql.query(statement, parameters);
 }
 
 const createNewsForTour = async (params) => {
-    const tourId = params.tourId;
-    const sportId = await getSportIdByTourId(tourId);
     const statement = 'insert into news(title, description, matchId, tourId, sportId) values()'
-    const parameters = [params.title, params.description, null, tourId, sportId];
+    const parameters = [params.title, params.description, null, params.tourId, params.sportId];
     return await mysql.query(statement, parameters);
 }
 

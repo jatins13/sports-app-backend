@@ -21,7 +21,7 @@ const getTourIdByName = async params => {
 }
 
 const getTourIdByMatchId = async (matchId) => {
-    const statement = 'get tourId from matches where tours.id = ?';
+    const statement = 'select tourId from matches where tours.id = ?';
     const parameters = [matchId];
     return await mysql.query(statement, parameters);
 }

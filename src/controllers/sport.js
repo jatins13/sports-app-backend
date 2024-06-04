@@ -16,6 +16,11 @@ const getAllSportsToursAndMatches = async () => {
     return res;
 }
 
+const getSportIdByTourId = async (tourId) => {
+    return await Sport.getSportIdByTourId(tourId);
+}
+
 module.exports = {
-    getAllSportsToursAndMatches: getAllSportsToursAndMatches
+    getAllSportsToursAndMatches: getAllSportsToursAndMatches,
+    getSportIdByTourId: getSportIdByTourId
 }
