@@ -22,13 +22,19 @@ const getNewsByMatchId = async (params) => {
 const createNewsForMatch = async (params) => {
     const statement = 'insert ignore into news (title, description, matchId, tourId, sportId) values (?, ?, ?, ?, ?)';
     const parameters = [params.title, params.description, params.matchId, params.tourId, params.sportId];
-    return await mysql.query(statement, parameters);
+    const insertObject = await mysql.query(statement, parameters);
+    const getNewsByIdSql = 'select * from news where id = ?';
+    const getNewsByIdParams = [insertObject.insertId];
+    return await mysql.query(getNewsByIdSql, getNewsByIdParams);
 }
 
 const createNewsForTour = async (params) => {
     const statement = 'insert ignore into news (title, description, matchId, tourId, sportId) values (?, ?, ?, ?, ?)';
     const parameters = [params.title, params.description, null, params.tourId, params.sportId];
-    return await mysql.query(statement, parameters);
+    const insertObject = await mysql.query(statement, parameters);
+    const getNewsByIdSql = 'select * from news where id = ?';
+    const getNewsByIdParams = [insertObject.insertId];
+    return await mysql.query(getNewsByIdSql, getNewsByIdParams);
 }
 
 module.exports = {
