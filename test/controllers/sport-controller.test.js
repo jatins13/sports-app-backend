@@ -55,7 +55,7 @@ describe('Sport Controller', () => {
     describe('getSportIdByTourId', () => {
         it('should return sport ID by tour ID', async () => {
             const tourId = 1;
-            const expectedSportId = { sportId: 10 };
+            const expectedSportId = [{ sportId: 10 }];
 
             Sport.getSportIdByTourId.mockResolvedValue(expectedSportId);
 

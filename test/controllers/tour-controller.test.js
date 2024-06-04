@@ -28,8 +28,8 @@ describe('Test tour-controller', () => {
         it('should return matches for a tour', async () => {
             const params = { name: 'Tour 1' };
             const matches = [
-                { name: 'Match 1', tourId: 1, format: 'Format 1', startTime: '2024-06-05', endTime: '2024-06-10' },
-                { name: 'Match 2', tourId: 1, format: 'Format 2', startTime: '2024-06-15', endTime: '2024-06-20' }
+                { id: 1, name: 'Match 1', tourId: 1, format: 'Format 1', startTime: '2024-06-05', endTime: '2024-06-10' },
+                { id: 2, name: 'Match 2', tourId: 1, format: 'Format 2', startTime: '2024-06-15', endTime: '2024-06-20' }
             ];
 
             Tour.getMatchesByTourName.mockResolvedValue(matches);
@@ -49,7 +49,7 @@ describe('Test tour-controller', () => {
 
     describe('getTourIdByMatchId', () => {
         it('should return tour ID for a match', async () => {
-            const matchId = 1;
+            const matchId = [{ matchId: 1 }];
             const expectedTourId = 1;
 
             Tour.getTourIdByMatchId.mockResolvedValue(expectedTourId);

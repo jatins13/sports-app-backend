@@ -18,8 +18,8 @@ describe('News Controller', () => {
             const tourId = 1;
             const sportId = 1;
 
-            Tour.getTourIdByMatchId.mockResolvedValue(tourId);
-            Sport.getSportIdByTourId.mockResolvedValue(sportId);
+            Tour.getTourIdByMatchId.mockResolvedValue([{ tourId: tourId }]);
+            Sport.getSportIdByTourId.mockResolvedValue([{ sportId: sportId }]);
             News.createNewsForMatch.mockResolvedValue({ id: 1, ...body, tourId, sportId });
 
             const result = await controller.createNewsForMatch(body);
@@ -36,7 +36,7 @@ describe('News Controller', () => {
             const body = { title: 'News Title', description: 'News Description', tourId: 1 };
             const sportId = 1;
 
-            Sport.getSportIdByTourId.mockResolvedValue(sportId);
+            Sport.getSportIdByTourId.mockResolvedValue([{ sportId: sportId }]);
             News.createNewsForTour.mockResolvedValue({ id: 1, ...body, sportId });
 
             const result = await controller.createNewsForTour(body);
