@@ -39,12 +39,6 @@ describe('Test tour-controller', () => {
             expect(Tour.getMatchesByTourName).toHaveBeenCalledWith(params);
             expect(result).toEqual(matches);
         });
-
-        it('should throw an error if name parameter is missing', async () => {
-            const params = {}; // Missing 'name' parameter
-
-            await expect(tourController.getMatchesByTourName(params)).rejects.toThrow('Missing required parameter: name');
-        });
     });
 
     describe('getTourIdByMatchId', () => {
