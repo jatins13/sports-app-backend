@@ -5,12 +5,12 @@ module.exports = function (app) {
         try {
             const body = req.body;
             if (body.matchId) {
-                return await News.createNewsForMatch(body);
+                return res.json(await News.createNewsForMatch(body));
             }
             else if (body.tourId) {
                 return res.json(await News.createNewsForTour(body));
             }
-            throw new Error("Give a valid body with either matchId or tourId.")
+            return res.status(500).json({ message: "Give a valid body with either matchId or tourId." })
 
         } catch (err) {
             return next(err);
@@ -21,7 +21,6 @@ module.exports = function (app) {
     app.route('/news').get(async (req, res, next) => {
         try {
             let params = req.query;
-            let result = null;
             if (params.matchId) {
                 return res.json(await News.getNewsByMatchId(params));
             }
@@ -31,7 +30,7 @@ module.exports = function (app) {
             else if (params.sportId) {
                 return res.json(await News.getNewsBySportId(params));
             }
-            throw new Error("Please provide a valid matchId or tourId or sportId to fetch news.")
+            return res.status(500).json({ message: "Please provide a valid matchId or tourId or sportId to fetch news." });
 
         } catch (err) {
             return next(err);
